@@ -138,8 +138,27 @@
         }
         html { scroll-behavior: smooth; }
         .nav-scrolled { box-shadow: 0 6px 20px rgba(0,0,0,0.4); border-bottom: 1px solid #222; }
-        .reveal-init { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; will-change: opacity, transform; }
+        .reveal-init { opacity: 0; transition: opacity .6s ease, transform .6s ease, filter .6s ease; will-change: opacity, transform, filter; }
         .reveal-init.reveal { opacity: 1; transform: none; }
+        /* Reveal variants */
+        [data-animate="fade-up"].reveal-init { transform: translateY(16px); }
+        [data-animate="fade-down"].reveal-init { transform: translateY(-16px); }
+        [data-animate="fade-left"].reveal-init { transform: translateX(16px); }
+        [data-animate="fade-right"].reveal-init { transform: translateX(-16px); }
+        [data-animate="scale"].reveal-init { transform: scale(0.96); }
+        [data-animate="blur"].reveal-init { filter: blur(6px); }
+        /* Progress bar + Back to top */
+        #progress-bar { transform-origin: left center; }
+        #toTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #toTop { transform: translateY(8px); }
+        /* Desktop tuning */
+        @media (min-width: 1024px) and (pointer: fine) {
+            [data-animate="fade-up"].reveal-init { transform: translateY(24px); }
+            [data-animate="fade-down"].reveal-init { transform: translateY(-24px); }
+            [data-animate="fade-left"].reveal-init { transform: translateX(24px); }
+            [data-animate="fade-right"].reveal-init { transform: translateX(-24px); }
+            .service-card { transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; transform-style: preserve-3d; }
+        }
         @media (prefers-reduced-motion: reduce) {
             .reveal-init { transition: none; }
         }
@@ -256,9 +275,9 @@
                 <p class="text-xl text-gray-400 max-w-3xl mx-auto">Service de chauffeur à Toulouse et en Occitanie: transferts aéroport Toulouse‑Blagnac (TLS), événements, business, et déplacements VIP en Mercedes Classe V.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8" data-stagger>
                 <!-- Mis en avant: Chauffeur + Garde rapprochée célébrités -->
-                <div id="garde" class="service-card p-8 rounded-xl border-2 border-secondary">
+                <div id="garde" class="service-card p-8 rounded-xl border-2 border-secondary" data-animate="scale">
                     <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-star text-black text-2xl"></i>
                     </div>
@@ -271,7 +290,7 @@
                     </ul>
                 </div>
                 
-                <div class="service-card p-8 rounded-xl">
+                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
                     <h3 class="text-2xl font-black text-white mb-3">Chauffeur Toulouse centre</h3>
                     <p class="text-gray-400">Trajets intra‑muros: Capitole, Carmes, Compans, Saint‑Cyprien. Attente incluse, itinéraires optimisés.</p>
                     <ul class="mt-4 space-y-2 text-gray-400 text-sm">
@@ -280,7 +299,7 @@
                         <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Paiement sans contact</li>
                     </ul>
                 </div>
-                <div class="service-card p-8 rounded-xl">
+                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
                     <h3 class="text-2xl font-black text-white mb-3">Transfert aéroport Blagnac</h3>
                     <p class="text-gray-400">Prise en charge à l’aéroport de Toulouse‑Blagnac (TLS), suivi de vol, accueil personnalisé, gestion bagages.</p>
                     <ul class="mt-4 space-y-2 text-gray-400 text-sm">
@@ -289,7 +308,7 @@
                         <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Itinéraires alternatifs</li>
                     </ul>
                 </div>
-                <div class="service-card p-8 rounded-xl">
+                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
                     <h3 class="text-2xl font-black text-white mb-3">Événements & entreprises</h3>
                     <p class="text-gray-400">Salons, séminaires (Labège, Centre de Congrès), tournées médias, visites clients: protocole VIP et discrétion.</p>
                     <ul class="mt-4 space-y-2 text-gray-400 text-sm">
@@ -318,9 +337,9 @@
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8" data-stagger>
                 <!-- Service 1 -->
-                <div id="protection-vip" class="service-card p-8 rounded-xl border-2 border-secondary lg:col-span-2">
+                <div id="protection-vip" class="service-card p-8 rounded-xl border-2 border-secondary lg:col-span-2" data-animate="scale">
                     <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-user-secret text-black text-2xl"></i>
                     </div>
@@ -348,7 +367,7 @@
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="service-card p-8 rounded-xl">
+                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
                     <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-car text-black text-2xl"></i>
                     </div>
@@ -373,7 +392,7 @@
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="service-card p-8 rounded-xl">
+                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
                     <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-shield-alt text-black text-2xl"></i>
                     </div>
@@ -410,17 +429,17 @@
                 </p>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-60">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-60" data-stagger>
                 <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32" data-animate>
                     <span class="text-white font-bold text-xl">CELEBRITY</span>
                 </div>
-                <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32">
+                <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32" data-animate="fade-up">
                     <span class="text-white font-bold text-xl">VIP</span>
                 </div>
-                <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32">
+                <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32" data-animate="fade-up">
                     <span class="text-white font-bold text-xl">POLITICS</span>
                 </div>
-                <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32">
+                <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32" data-animate="fade-up">
                     <span class="text-white font-bold text-xl">BUSINESS</span>
                 </div>
             </div>
@@ -440,19 +459,19 @@
                 <p class="text-xl text-gray-400 max-w-3xl mx-auto">Réponses aux questions fréquentes sur notre service de chauffeur privé à Toulouse et en Occitanie.</p>
             </div>
             <div class="max-w-4xl mx-auto space-y-4">
-                <details class="service-card p-6 rounded-xl">
+                <details class="service-card p-6 rounded-xl" data-animate="fade-up">
                     <summary class="font-bold cursor-pointer">Proposez-vous un service de chauffeur privé à Toulouse ?</summary>
                     <p class="mt-3 text-gray-300">Oui, nous opérons à Toulouse intra‑muros et dans toute l’aire toulousaine (Blagnac, Colomiers, Labège, Balma). Mercedes Classe V, conducteurs experts, protocole VIP.</p>
                 </details>
-                <details class="service-card p-6 rounded-xl">
+                <details class="service-card p-6 rounded-xl" data-animate="fade-up">
                     <summary class="font-bold cursor-pointer">Assurez-vous les transferts aéroport Toulouse‑Blagnac (TLS) ?</summary>
                     <p class="mt-3 text-gray-300">Oui, accueil personnalisé, suivi de vol, aide bagages et itinéraires alternatifs selon le trafic. Dépose/prise en charge aux zones dédiées.</p>
                 </details>
-                <details class="service-card p-6 rounded-xl">
+                <details class="service-card p-6 rounded-xl" data-animate="fade-up">
                     <summary class="font-bold cursor-pointer">Êtes-vous disponibles 24/7 ?</summary>
                     <p class="mt-3 text-gray-300">Disponibilité continue 24h/24 et 7j/7. Intervention sur demande urgente ou planifiée.</p>
                 </details>
-                <details class="service-card p-6 rounded-xl">
+                <details class="service-card p-6 rounded-xl" data-animate="fade-up">
                     <summary class="font-bold cursor-pointer">Quelles zones desservez-vous autour de Toulouse ?</summary>
                     <p class="mt-3 text-gray-300">Toulouse, Blagnac, Colomiers, Balma, Labège, Ramonville, Muret, et plus largement l’Occitanie selon la mission.</p>
                 </details>
@@ -570,6 +589,13 @@
         </div>
     </footer>
 
+    <!-- Scroll progress bar -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-secondary z-50" style="width:0;"></div>
+    <!-- Back to top button -->
+    <button id="toTop" aria-label="Retour en haut" class="fixed bottom-24 right-4 z-50 h-12 w-12 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
         // Navigation smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -632,6 +658,14 @@
             const animatedEls = document.querySelectorAll('[data-animate]');
             animatedEls.forEach(el => el.classList.add('reveal-init'));
 
+            // Stagger support: add incremental delays within containers
+            document.querySelectorAll('[data-stagger]').forEach(container => {
+                const children = container.querySelectorAll('[data-animate]');
+                children.forEach((child, idx) => {
+                    child.style.transitionDelay = `${Math.min(idx * 80, 400)}ms`;
+                });
+            });
+
             if (!prefersReduced && 'IntersectionObserver' in window) {
                 const io = new IntersectionObserver((entries) => {
                     entries.forEach(en => {
@@ -661,6 +695,57 @@
                 window.addEventListener('scroll', onScroll, { passive: true });
                 onScroll();
             }
+        })();
+
+        // Scroll progress bar + Back-to-top
+        (function(){
+            const bar = document.getElementById('progress-bar');
+            const toTop = document.getElementById('toTop');
+            const update = () => {
+                const h = document.documentElement;
+                const max = (h.scrollHeight - h.clientHeight) || 1;
+                const p = Math.min(1, window.scrollY / max);
+                bar.style.width = `${p * 100}%`;
+                if (window.scrollY > 300) {
+                    toTop.classList.add('show');
+                } else {
+                    toTop.classList.remove('show');
+                }
+            };
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            update();
+            toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        })();
+
+        // Desktop hover tilt on cards (pointer: fine)
+        (function(){
+            const finePointer = window.matchMedia('(pointer: fine)').matches;
+            if (!finePointer) return;
+            const cards = document.querySelectorAll('.service-card');
+            let rafId = null;
+            cards.forEach(card => {
+                let rotX = 0, rotY = 0;
+                const onMove = (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const cx = rect.left + rect.width / 2;
+                    const cy = rect.top + rect.height / 2;
+                    const dx = (e.clientX - cx) / (rect.width / 2);
+                    const dy = (e.clientY - cy) / (rect.height / 2);
+                    rotY = dx * 6; // left/right
+                    rotX = -dy * 6; // up/down
+                    if (!rafId) rafId = requestAnimationFrame(apply);
+                };
+                const apply = () => {
+                    rafId = null;
+                    card.style.transform = `perspective(800px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
+                };
+                const onLeave = () => {
+                    card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
+                };
+                card.addEventListener('mousemove', onMove);
+                card.addEventListener('mouseleave', onLeave);
+            });
         })();
     </script>
   
