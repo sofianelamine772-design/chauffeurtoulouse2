@@ -136,6 +136,13 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        html { scroll-behavior: smooth; }
+        .nav-scrolled { box-shadow: 0 6px 20px rgba(0,0,0,0.4); border-bottom: 1px solid #222; }
+        .reveal-init { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; will-change: opacity, transform; }
+        .reveal-init.reveal { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-init { transition: none; }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-black text-white">
@@ -173,18 +180,20 @@
     <section id="accueil" class="hero-section min-h-screen flex items-center pt-20">
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="text-center lg:text-left">
+                <div class="text-center lg:text-left" data-animate>
                     <div class="inline-block bg-secondary/20 px-4 py-2 rounded-full mb-6">
                         <span class="text-secondary font-semibold text-sm">Votre excellence • Notre priorité</span>
                     </div>
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-                        SÉCURITÉ
+                        ÉLÉGANCE
                         <span class="text-secondary glow-text">DISCRÈTE</span>
-                        <br>ET CHAUFFEUR PRIVÉ À TOULOUSE
+                        <br>ET SERVICE D’EXCEPTION À TOULOUSE
+
                     </h1>
                     <p class="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        Chauffeur privé à Toulouse: transferts aéroport Toulouse‑Blagnac (TLS), trajets business et événements.
-                        Mercedes Classe V, service 24/7, accueil personnalisé et discrétion.
+                        Chauffeur privé à Toulouse, spécialisé dans les transferts aéroportuaires, trajets professionnels, soirées et événements.
+                        Bénéficiez d’un service haut de gamme en Mercedes Classe V, disponible 24h/7j, alliant ponctualité, confort et confidentialité.
+                        Un accueil personnalisé, une présence discrète, et un professionnalisme irréprochable pour chacun de vos déplacements.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                         <a href="https://wa.me/33633391994" class="btn-secondary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center">
@@ -194,7 +203,7 @@
                     </div>
                 </div>
                 
-                <div class="relative">
+                <div class="relative parallax" data-animate>
                     <div class="relative">
                         <img 
                             src="a.jpg.webp" 
@@ -205,7 +214,7 @@
                         <div class="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent rounded-lg"></div>
                     </div>
                     <div class="absolute -bottom-6 -right-6 bg-black border border-gray-800 p-6 rounded-lg shadow-2xl">
-                        <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-4" data-animate>
                             <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
                                 <i class="fas fa-car text-black text-xl"></i>
                             </div>
@@ -224,7 +233,7 @@
     <section id="chiffres" class="py-16 bg-black">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                <div class="text-center bg-dark p-8 rounded-xl border border-gray-800">
+                <div class="text-center bg-dark p-8 rounded-xl border border-gray-800" data-animate>
                     <div class="text-4xl font-black text-secondary mb-2">24/7</div>
                     <div class="text-sm text-gray-400 tracking-wide">SURVEILLANCE</div>
                 </div>
@@ -248,6 +257,20 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Mis en avant: Chauffeur + Garde rapprochée célébrités -->
+                <div id="garde" class="service-card p-8 rounded-xl border-2 border-secondary">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-star text-black text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-4">CHAUFFEUR + GARDE RAPPROCHÉE</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Solution dédiée aux célébrités et VIP: conducteur privé coordonné à une équipe de protection rapprochée, itinéraires discrets et périmètre sécurisé.</p>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-3"></i> Coordination chauffeur/équipe</li>
+                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-3"></i> Accès zones réservées</li>
+                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-3"></i> Brief sécurité personnalisé</li>
+                    </ul>
+                </div>
+                
                 <div class="service-card p-8 rounded-xl">
                     <h3 class="text-2xl font-black text-white mb-3">Chauffeur Toulouse centre</h3>
                     <p class="text-gray-400">Trajets intra‑muros: Capitole, Carmes, Compans, Saint‑Cyprien. Attente incluse, itinéraires optimisés.</p>
@@ -275,25 +298,12 @@
                         <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Facturation pro</li>
                     </ul>
                 </div>
-                
-                <!-- Service 4: Chauffeur + Garde rapprochée célébrités -->
-                <div class="service-card p-8 rounded-xl">
-                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-star text-black text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-black text-white mb-4">CHAUFFEUR + GARDE RAPPROCHÉE</h3>
-                    <p class="text-gray-400 mb-6 leading-relaxed">Solution dédiée aux célébrités et VIP: conducteur privé coordonné à une équipe de protection rapprochée, itinéraires discrets et périmètre sécurisé.</p>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-3"></i> Coordination chauffeur/équipe</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-3"></i> Accès zones réservées</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-3"></i> Brief sécurité personnalisé</li>
-                    </ul>
-                </div>
             </div>
 
             <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#contact" class="btn-primary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center"><i class="fas fa-car mr-2"></i>Devis chauffeur Toulouse</a>
                 <a href="#services" class="btn-secondary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center"><i class="fas fa-list mr-2"></i>Voir tous les services</a>
+                <a href="#garde" class="btn-secondary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center"><i class="fas fa-user-shield mr-2"></i>Garde rapprochée</a>
             </div>
         </div>
     </section>
@@ -310,7 +320,7 @@
             
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <!-- Service 1 -->
-                <div class="service-card p-8 rounded-xl">
+                <div id="protection-vip" class="service-card p-8 rounded-xl border-2 border-secondary lg:col-span-2">
                     <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-user-secret text-black text-2xl"></i>
                     </div>
@@ -332,6 +342,9 @@
                             Équipes d'intervention rapide
                         </li>
                     </ul>
+                    <div class="mt-6">
+                        <a href="#contact" class="btn-primary px-6 py-3 rounded-lg font-bold inline-flex items-center"><i class="fas fa-shield-alt mr-2"></i>Demander une protection</a>
+                    </div>
                 </div>
                 
                 <!-- Service 2 -->
@@ -362,7 +375,7 @@
                 <!-- Service 3 -->
                 <div class="service-card p-8 rounded-xl">
                     <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-calendar-star text-black text-2xl"></i>
+                        <i class="fas fa-shield-alt text-black text-2xl"></i>
                     </div>
                     <h3 class="text-2xl font-black text-white mb-4">SÉCURITÉ ÉVÉNEMENTIELLE</h3>
                     <p class="text-gray-400 mb-6 leading-relaxed">
@@ -398,7 +411,7 @@
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-60">
-                <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32">
+                <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32" data-animate>
                     <span class="text-white font-bold text-xl">CELEBRITY</span>
                 </div>
                 <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32">
@@ -552,7 +565,7 @@
             </div>
             
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
-                <p class="text-sm">&copy; 2024 Loghtning VIP Chauffeur & Protection Rapproché . TOUS DROITS RÉSERVÉS. CONFIDENTIEL.</p>
+                <p class="text-sm">&copy; 2025 Loghtning VIP Chauffeur & Protection Rapproché . TOUS DROITS RÉSERVÉS. CONFIDENTIEL.</p>
             </div>
         </div>
     </footer>
@@ -572,12 +585,15 @@
             });
         });
 
-        // Form submission
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Votre message sécurisé a été envoyé. Un agent vous contactera sous 24h.');
-            this.reset();
-        });
+        // Form submission (guard if form exists)
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Votre message sécurisé a été envoyé. Un agent vous contactera sous 24h.');
+                this.reset();
+            });
+        }
 
         // Mobile menu toggle
         const mobileMenuButton = document.querySelector('button.lg\\:hidden');
@@ -598,17 +614,54 @@
             navMenu.classList.toggle('border-gray-800');
         });
 
-        // Add scroll effect to navbar
+        // Add scroll effect to navbar (background + shadow)
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
-                nav.classList.add('bg-black');
+                nav.classList.add('bg-black', 'nav-scrolled');
                 nav.classList.remove('nav-gradient');
             } else {
-                nav.classList.remove('bg-black');
+                nav.classList.remove('bg-black', 'nav-scrolled');
                 nav.classList.add('nav-gradient');
             }
         });
+
+        // Reveal-on-scroll animations and lightweight parallax (mobile-friendly)
+        (function() {
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const animatedEls = document.querySelectorAll('[data-animate]');
+            animatedEls.forEach(el => el.classList.add('reveal-init'));
+
+            if (!prefersReduced && 'IntersectionObserver' in window) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(en => {
+                        if (en.isIntersecting) {
+                            en.target.classList.add('reveal');
+                            io.unobserve(en.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+                animatedEls.forEach(el => io.observe(el));
+            } else {
+                animatedEls.forEach(el => el.classList.add('reveal'));
+            }
+
+            // Simple parallax on hero image for mobile
+            const parallaxImgs = document.querySelectorAll('.parallax img');
+            const onScroll = () => {
+                parallaxImgs.forEach(img => {
+                    const rect = img.getBoundingClientRect();
+                    if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                        const offset = (rect.top - window.innerHeight / 2) * -0.06;
+                        img.style.transform = `translateY(${offset.toFixed(2)}px)`;
+                    }
+                });
+            };
+            if (!prefersReduced) {
+                window.addEventListener('scroll', onScroll, { passive: true });
+                onScroll();
+            }
+        })();
     </script>
   
   <!-- WhatsApp CTA bottom-right responsive with animated icon + text -->
