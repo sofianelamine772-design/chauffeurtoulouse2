@@ -65,16 +65,32 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
         
-        body {
-            font-family: 'Inter', sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Futuristic Hero Section with advanced effects */
         .hero-section {
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%, #000000 100%);
+            background-size: 400% 400%;
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         
         .hero-section::before {
@@ -84,84 +100,507 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(192,192,192,0.12)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(192, 192, 192, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(192, 192, 192, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(192, 192, 192, 0.08) 0%, transparent 60%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(192,192,192,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 1;
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.05); }
+        }
+        
+        /* Animated particles effect */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(192, 192, 192, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 70% 70%, rgba(192, 192, 192, 0.08) 0%, transparent 20%);
+            animation: rotate 40s linear infinite;
+            transform-origin: center;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg) translateZ(0); }
+            to { transform: rotate(360deg) translateZ(0); }
+        }
+        
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(192, 192, 192, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 15s infinite ease-in-out;
+        }
+        
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
+            25% { transform: translateY(-100px) translateX(50px) scale(1.2); opacity: 1; }
+            50% { transform: translateY(-200px) translateX(-30px) scale(0.8); opacity: 0.8; }
+            75% { transform: translateY(-100px) translateX(-50px) scale(1.1); opacity: 0.9; }
+        }
+        
+        /* Futuristic CTA Button */
+        .cta-futuristic {
+            position: relative;
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.1) 0%, rgba(192, 192, 192, 0.05) 100%);
+            border: 2px solid rgba(192, 192, 192, 0.3);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .cta-futuristic::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(192, 192, 192, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+        
+        .cta-futuristic:hover::before {
+            animation: shine 1s ease-in-out;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .cta-futuristic:hover {
+            border-color: rgba(192, 192, 192, 0.6);
+            box-shadow: 
+                0 0 30px rgba(192, 192, 192, 0.3),
+                0 0 60px rgba(192, 192, 192, 0.1),
+                inset 0 0 30px rgba(192, 192, 192, 0.1);
+            transform: translateY(-3px) scale(1.02);
         }
         
         .nav-gradient {
-            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, transparent 100%);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
         
+        /* Modern Service Cards with glassmorphism */
         .service-card {
-            background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
-            border: 1px solid #333;
-            transition: all 0.3s ease;
+            background: linear-gradient(145deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+            border: 1px solid rgba(192, 192, 192, 0.15);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transform: translateZ(0);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.15), transparent);
+            transition: left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
         }
         
         .service-card:hover {
-            transform: translateY(-5px);
-            border-color: #C0C0C0;
-            box-shadow: 0 10px 30px rgba(192, 192, 192, 0.15);
+            transform: translateY(-8px) scale(1.02) translateZ(0);
+            border-color: rgba(192, 192, 192, 0.5);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(192, 192, 192, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
         
+        /* Sub-service cards */
+        .sub-service-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(192, 192, 192, 0.1);
+            border-left: 3px solid rgba(192, 192, 192, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .sub-service-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(192, 192, 192, 0.5) 0%, transparent 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .sub-service-card:hover {
+            border-left-color: rgba(192, 192, 192, 0.6);
+            background: rgba(0, 0, 0, 0.6);
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(192, 192, 192, 0.1);
+        }
+        
+        .sub-service-card:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+        
+        /* Enhanced Button Styles */
         .btn-primary {
-            background: linear-gradient(135deg, #E5E5E5 0%, #C0C0C0 100%);
+            background: linear-gradient(135deg, #E5E5E5 0%, #C0C0C0 50%, #E5E5E5 100%);
+            background-size: 200% 200%;
             color: #000;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(192, 192, 192, 0.2);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
         }
         
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(192, 192, 192, 0.35);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(192, 192, 192, 0.4);
+            background-position: right center;
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px) scale(1.02);
         }
         
         .btn-secondary {
             background: transparent;
-            border: 2px solid #C0C0C0;
+            border: 2px solid rgba(192, 192, 192, 0.5);
             color: #C0C0C0;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(192, 192, 192, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+        
+        .btn-secondary:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .btn-secondary:hover {
-            background: #C0C0C0;
-            color: #000;
+            background: rgba(192, 192, 192, 0.1);
+            color: #E5E5E5;
+            border-color: #C0C0C0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(192, 192, 192, 0.2);
         }
         
+        .btn-secondary span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Enhanced Glow Effects */
         .glow-text {
-            text-shadow: 0 0 10px rgba(192, 192, 192, 0.6);
+            text-shadow: 
+                0 0 10px rgba(192, 192, 192, 0.6),
+                0 0 20px rgba(192, 192, 192, 0.4),
+                0 0 30px rgba(192, 192, 192, 0.2);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 10px rgba(192, 192, 192, 0.6),
+                    0 0 20px rgba(192, 192, 192, 0.4),
+                    0 0 30px rgba(192, 192, 192, 0.2);
+            }
+            50% { 
+                text-shadow: 
+                    0 0 15px rgba(192, 192, 192, 0.8),
+                    0 0 25px rgba(192, 192, 192, 0.6),
+                    0 0 35px rgba(192, 192, 192, 0.4);
+            }
         }
         
         .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
-        html { scroll-behavior: smooth; }
-        .nav-scrolled { box-shadow: 0 6px 20px rgba(0,0,0,0.4); border-bottom: 1px solid #222; }
-        .reveal-init { opacity: 0; transition: opacity .6s ease, transform .6s ease, filter .6s ease; will-change: opacity, transform, filter; }
-        .reveal-init.reveal { opacity: 1; transform: none; }
-        /* Reveal variants */
-        [data-animate="fade-up"].reveal-init { transform: translateY(16px); }
-        [data-animate="fade-down"].reveal-init { transform: translateY(-16px); }
-        [data-animate="fade-left"].reveal-init { transform: translateX(16px); }
-        [data-animate="fade-right"].reveal-init { transform: translateX(-16px); }
-        [data-animate="scale"].reveal-init { transform: scale(0.96); }
-        [data-animate="blur"].reveal-init { filter: blur(6px); }
-        /* Progress bar + Back to top */
-        #progress-bar { transform-origin: left center; }
-        #toTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-        #toTop { transform: translateY(8px); }
-        /* Desktop tuning */
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(192, 192, 192, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(192, 192, 192, 0.3);
+            box-shadow: 0 10px 30px rgba(192, 192, 192, 0.1);
+        }
+        
+        /* Smooth Scroll */
+        html { 
+            scroll-behavior: smooth; 
+        }
+        
+        /* Enhanced Navigation */
+        .nav-scrolled { 
+            background: rgba(0, 0, 0, 0.98) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); 
+            border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+            backdrop-filter: blur(20px);
+        }
+        
+        /* Advanced Reveal Animations - Optimized for performance */
+        .reveal-init { 
+            opacity: 0; 
+            transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        filter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+        
+        .reveal-init.reveal { 
+            opacity: 1; 
+            transform: translate3d(0, 0, 0); 
+            filter: none;
+        }
+        
+        /* GPU acceleration for smooth animations */
+        .service-card,
+        .btn-primary,
+        .btn-secondary,
+        .stat-card {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        
+        /* Reveal variants with enhanced effects */
+        [data-animate="fade-up"].reveal-init { 
+            transform: translateY(30px); 
+        }
+        
+        [data-animate="fade-down"].reveal-init { 
+            transform: translateY(-30px); 
+        }
+        
+        [data-animate="fade-left"].reveal-init { 
+            transform: translateX(-30px); 
+        }
+        
+        [data-animate="fade-right"].reveal-init { 
+            transform: translateX(30px); 
+        }
+        
+        [data-animate="scale"].reveal-init { 
+            transform: scale(0.9); 
+        }
+        
+        [data-animate="blur"].reveal-init { 
+            filter: blur(10px); 
+        }
+        
+        /* Progress bar with gradient */
+        #progress-bar { 
+            transform-origin: left center;
+            background: linear-gradient(90deg, #C0C0C0 0%, #E5E5E5 50%, #C0C0C0 100%);
+            background-size: 200% 100%;
+            animation: progressShimmer 2s linear infinite;
+            box-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
+        }
+        
+        @keyframes progressShimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Enhanced Back to Top Button */
+        #toTop.show { 
+            opacity: 1; 
+            pointer-events: auto; 
+            transform: translateY(0) scale(1); 
+        }
+        
+        #toTop { 
+            transform: translateY(8px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+        
+        #toTop:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(192, 192, 192, 0.3);
+        }
+        
+        /* Desktop enhancements */
         @media (min-width: 1024px) and (pointer: fine) {
-            [data-animate="fade-up"].reveal-init { transform: translateY(24px); }
-            [data-animate="fade-down"].reveal-init { transform: translateY(-24px); }
-            [data-animate="fade-left"].reveal-init { transform: translateX(24px); }
-            [data-animate="fade-right"].reveal-init { transform: translateX(-24px); }
-            .service-card { transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; transform-style: preserve-3d; }
+            [data-animate="fade-up"].reveal-init { transform: translateY(40px); }
+            [data-animate="fade-down"].reveal-init { transform: translateY(-40px); }
+            [data-animate="fade-left"].reveal-init { transform: translateX(-40px); }
+            [data-animate="fade-right"].reveal-init { transform: translateX(40px); }
+            .service-card { 
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                           box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                           border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+                transform-style: preserve-3d; 
+            }
         }
+        
+        /* Floating animation for icons */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Section dividers with gradient */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(192, 192, 192, 0.3) 50%, 
+                transparent 100%);
+            margin: 60px 0;
+        }
+        
+        /* Enhanced image effects */
+        .hero-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-image img {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Modern badge/pill styles */
+        .badge {
+            background: rgba(192, 192, 192, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(192, 192, 192, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .badge:hover {
+            background: rgba(192, 192, 192, 0.2);
+            border-color: rgba(192, 192, 192, 0.4);
+            transform: scale(1.05);
+        }
+        
+        /* Smooth link transitions */
+        a {
+            transition: all 0.3s ease;
+        }
+        
+        /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
-            .reveal-init { transition: none; }
+            .reveal-init, 
+            .service-card,
+            .btn-primary,
+            .btn-secondary,
+            .stat-card,
+            .hero-section::before,
+            .hero-section::after {
+                transition: none;
+                animation: none;
+            }
+            
+            .glow-text {
+                animation: none;
+            }
+        }
+        
+        /* Enhanced WhatsApp button */
+        .whatsapp-btn {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(192, 192, 192, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(192, 192, 192, 0);
+            }
         }
     </style>
 </head>
@@ -175,11 +614,26 @@
                 </div>
                 
                 <div class="hidden lg:flex space-x-8">
-                    <a href="#accueil" class="text-white hover:text-secondary font-medium transition-colors">ACCUEIL</a>
-                    <a href="#services" class="text-white hover:text-secondary font-medium transition-colors">SERVICES</a>
-                    <a href="#chauffeur" class="text-white hover:text-secondary font-medium transition-colors">CHAUFFEUR TOULOUSE</a>
-                    <a href="#clients" class="text-white hover:text-secondary font-medium transition-colors">CLIENTS</a>
-                    <a href="#contact" class="text-white hover:text-secondary font-medium transition-colors">CONTACT</a>
+                    <a href="#accueil" class="text-white hover:text-secondary font-semibold transition-all duration-300 relative group">
+                        ACCUEIL
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#services" class="text-white hover:text-secondary font-semibold transition-all duration-300 relative group">
+                        SERVICES
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#chauffeur" class="text-white hover:text-secondary font-semibold transition-all duration-300 relative group">
+                        CHAUFFEUR TOULOUSE
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#clients" class="text-white hover:text-secondary font-semibold transition-all duration-300 relative group">
+                        CLIENTS
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#contact" class="text-white hover:text-secondary font-semibold transition-all duration-300 relative group">
+                        CONTACT
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
+                    </a>
                 </div>
                 
                 <div class="hidden lg:block">
@@ -196,50 +650,108 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="accueil" class="hero-section min-h-screen flex items-center pt-20">
+    <!-- Hero Section - Futuristic Design -->
+    <section id="accueil" class="hero-section min-h-screen flex items-center pt-20 relative">
+        <!-- Floating particles -->
+        <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 40%; left: 50%; animation-delay: 4s;"></div>
+        <div class="particle" style="top: 80%; left: 20%; animation-delay: 6s;"></div>
+        <div class="particle" style="top: 30%; left: 70%; animation-delay: 8s;"></div>
+        
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="text-center lg:text-left" data-animate>
-                    <div class="inline-block bg-secondary/20 px-4 py-2 rounded-full mb-6">
-                        <span class="text-secondary font-semibold text-sm">Votre excellence • Notre priorité</span>
+                <div class="text-center lg:text-left" data-animate="fade-up">
+                    <div class="inline-block cta-futuristic px-6 py-3 rounded-full mb-8 relative overflow-hidden">
+                        <span class="text-secondary font-bold text-sm uppercase tracking-wider relative z-10 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+                            Votre excellence • Notre priorité
+                        </span>
                     </div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-                        SERVICE
-                        <span class="text-secondary glow-text">D’EXCEPTION</span>
-                        <br>Toulouse
-
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black mb-8 leading-tight tracking-tight">
+                        <span class="block">SERVICE</span>
+                        <span class="text-secondary glow-text block mt-2 relative inline-block">
+                            D'EXCEPTION
+                            <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-secondary to-transparent opacity-50"></span>
+                        </span>
+                        <span class="block mt-2">Toulouse</span>
                     </h1>
-                    <p class="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
- Chauffeur privé à Toulouse, expert en transferts aéroport, déplacements professionnels, soirées et événements.  Service premium 24h/7j en Mercedes Classe V, confort et discrétion.  Accueil personnalisé et professionnalisme irréprochable pour tous vos trajets.
+                    <p class="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-12 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
+                        Chauffeur privé à Toulouse, expert en transferts aéroport, déplacements professionnels, soirées et événements. Service premium 24h/7j en Mercedes Classe V, confort et discrétion. Accueil personnalisé et professionnalisme irréprochable pour tous vos trajets.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="https://wa.me/33633391994" class="btn-secondary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center">
-                            <i class="fab fa-whatsapp mr-2"></i>
+                    
+                    <!-- Futuristic CTA Section -->
+                    <div class="mb-8 p-6 rounded-2xl cta-futuristic border-2 border-secondary/30 relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Réponse immédiate</p>
+                                <p class="text-2xl font-black text-white">Réservez votre trajet</p>
+                            </div>
+                            <div class="w-16 h-16 bg-gradient-to-br from-secondary to-gray-300 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                                <i class="fas fa-bolt text-black text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="tel:+33633391994" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg inline-flex items-center justify-center group flex-1 relative overflow-hidden">
+                                <span class="flex items-center relative z-10">
+                                    <i class="fas fa-phone mr-2 group-hover:scale-110 transition-transform"></i>
+                                    Appeler maintenant
+                                </span>
+                            </a>
+                            <a href="https://wa.me/33633391994" class="btn-secondary px-8 py-4 rounded-xl font-bold text-lg inline-flex items-center justify-center group flex-1">
+                                <span class="flex items-center">
+                                    <i class="fab fa-whatsapp mr-2 group-hover:scale-110 transition-transform"></i>
                             WhatsApp
+                                </span>
                         </a>
                     </div>
                 </div>
                 
-                <div class="relative parallax" data-animate>
-                    <div class="relative">
+                    <!-- Trust indicators -->
+                    <div class="flex flex-wrap gap-6 justify-center lg:justify-start text-sm">
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-check-circle text-secondary"></i>
+                            <span>Disponible 24h/24</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-check-circle text-secondary"></i>
+                            <span>Réponse immédiate</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-check-circle text-secondary"></i>
+                            <span>Devis gratuit</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative parallax" data-animate="fade-left">
+                    <div class="relative hero-image">
                         <img 
                             src="a.jpeg" 
                             alt="Chauffeur privé Toulouse en Mercedes Classe V" 
-                            class="w-full rounded-lg shadow-2xl"
+                            class="w-full rounded-2xl shadow-2xl"
                             loading="lazy"
                         />
-                        <div class="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent rounded-lg"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent rounded-2xl"></div>
+                        <div class="absolute top-4 left-4 badge px-4 py-2 rounded-full">
+                            <span class="text-secondary font-semibold text-sm flex items-center gap-2">
+                                <i class="fas fa-check-circle"></i>
+                                Disponible 24/7
+                            </span>
                     </div>
-                    <div class="absolute -bottom-6 -right-6 bg-black border border-gray-800 p-6 rounded-lg shadow-2xl">
-                        <div class="flex items-center space-x-4" data-animate>
-                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-black/95 to-black/90 backdrop-blur-xl border border-secondary/30 p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                        <div class="flex items-center space-x-4" data-animate="scale">
+                            <div class="w-14 h-14 bg-gradient-to-br from-secondary to-gray-300 rounded-full flex items-center justify-center shadow-lg float-animation">
                                 <i class="fas fa-car text-black text-xl"></i>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-400">VÉHICULE OFFICIEL</p>
-                                <p class="font-black text-white">MERCEDES CLASSE V</p>
-                                <p class="text-xs text-secondary"> • DISCRET</p>
+                                <p class="text-xs text-gray-400 uppercase tracking-wider">VÉHICULE OFFICIEL</p>
+                                <p class="font-black text-white text-lg">MERCEDES CLASSE V</p>
+                                <p class="text-xs text-secondary flex items-center gap-1">
+                                    <i class="fas fa-shield-alt"></i>
+                                    DISCRET & SÉCURISÉ
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -248,196 +760,403 @@
         </div>
     </section>
 
-    <section id="chiffres" class="py-16 bg-black">
-        <div class="container mx-auto px-6">
+    <section id="chiffres" class="py-20 bg-gradient-to-b from-black via-dark to-black relative overflow-hidden">
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                <div class="text-center bg-dark p-8 rounded-xl border border-gray-800" data-animate>
-                    <div class="text-4xl font-black text-secondary mb-2">24/7</div>
-                    <div class="text-sm text-gray-400 tracking-wide">SURVEILLANCE</div>
+                <div class="text-center stat-card p-10 rounded-2xl" data-animate="fade-up">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-gray-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <i class="fas fa-clock text-black text-2xl"></i>
                 </div>
-                <div class="text-center bg-dark p-8 rounded-xl border border-gray-800">
-                    <div class="text-4xl font-black text-secondary mb-2">50+</div>
-                    <div class="text-sm text-gray-400 tracking-wide">AGENTS</div>
+                    <div class="text-5xl font-black text-secondary mb-3 bg-gradient-to-r from-secondary to-gray-300 bg-clip-text text-transparent">24/7</div>
+                    <div class="text-sm text-gray-400 tracking-wider uppercase font-semibold">Disponibilité</div>
                 </div>
-                <div class="text-center bg-dark p-8 rounded-xl border border-gray-800">
-                    <div class="text-4xl font-black text-secondary mb-2">100%</div>
-                    <div class="text-sm text-gray-400 tracking-wide">DISCRÉTION</div>
+                <div class="text-center stat-card p-10 rounded-2xl" data-animate="fade-up">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-gray-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <i class="fas fa-users text-black text-2xl"></i>
+                </div>
+                    <div class="text-5xl font-black text-secondary mb-3 bg-gradient-to-r from-secondary to-gray-300 bg-clip-text text-transparent">50+</div>
+                    <div class="text-sm text-gray-400 tracking-wider uppercase font-semibold">Agents Experts</div>
+                </div>
+                <div class="text-center stat-card p-10 rounded-2xl" data-animate="fade-up">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-gray-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <i class="fas fa-shield-alt text-black text-2xl"></i>
+                    </div>
+                    <div class="text-5xl font-black text-secondary mb-3 bg-gradient-to-r from-secondary to-gray-300 bg-clip-text text-transparent">100%</div>
+                    <div class="text-sm text-gray-400 tracking-wider uppercase font-semibold">Discrétion</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="chauffeur" class="py-20 bg-black">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl lg:text-5xl font-black mb-4">CHAUFFEUR PRIVÉ À <span class="text-secondary">TOULOUSE</span></h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Service de chauffeur à Toulouse et en Occitanie: transferts aéroport, événements, business, et déplacements VIP en Mercedes Classe V.</p>
+    <div class="section-divider"></div>
+    <section id="chauffeur" class="py-20 bg-black relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-1/4 left-0 w-72 h-72 bg-secondary/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-0 w-72 h-72 bg-secondary/5 rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <div class="badge inline-block px-4 py-2 rounded-full mb-6">
+                    <span class="text-xs text-secondary font-bold uppercase tracking-wider">Nos Services</span>
+                </div>
+                <h2 class="text-5xl lg:text-6xl font-black mb-6 leading-tight">
+                    CHAUFFEUR PRIVÉ À 
+                    <span class="text-secondary glow-text">TOULOUSE</span>
+                </h2>
+                <p class="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
+                    Service de chauffeur à Toulouse et en Occitanie: transferts aéroport, événements, business, et déplacements VIP en Mercedes Classe V.
+                </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8" data-stagger>
                 <!-- Mis en avant: Chauffeur + Garde rapprochée célébrités -->
-                <div id="garde" class="service-card p-8 rounded-xl border-2 border-secondary" data-animate="scale">
-                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-star text-black text-2xl"></i>
+                <div id="garde" class="service-card p-8 rounded-2xl border-2 border-secondary relative overflow-hidden group" data-animate="scale">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-20 h-20 bg-gradient-to-br from-secondary to-gray-300 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                            <i class="fas fa-star text-black text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-black text-white mb-4">CHAUFFEUR + GARDE RAPPROCHÉE</h3>
-                    <p class="text-gray-400 mb-6 leading-relaxed">Solution dédiée aux célébrités et VIP: conducteur privé coordonné à une équipe de protection rapprochée, itinéraires discrets et périmètre sécurisé.</p>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-3"></i> Coordination chauffeur/équipe</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-3"></i> Accès zones réservées</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-3"></i> Brief sécurité personnalisé</li>
+                        <div class="badge inline-block px-3 py-1 rounded-full mb-4">
+                            <span class="text-xs text-secondary font-bold uppercase tracking-wider">Service Premium</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-4 group-hover:text-secondary transition-colors">CHAUFFEUR + GARDE RAPPROCHÉE</h3>
+                        <p class="text-gray-300 mb-6 leading-relaxed">Solution dédiée aux célébrités et VIP: conducteur privé coordonné à une équipe de protection rapprochée, itinéraires discrets et périmètre sécurisé.</p>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-center group/item">
+                                <i class="fas fa-check text-secondary mr-3 group-hover/item:scale-125 transition-transform"></i> 
+                                Coordination chauffeur/équipe
+                            </li>
+                            <li class="flex items-center group/item">
+                                <i class="fas fa-check text-secondary mr-3 group-hover/item:scale-125 transition-transform"></i> 
+                                Accès zones réservées
+                            </li>
+                            <li class="flex items-center group/item">
+                                <i class="fas fa-check text-secondary mr-3 group-hover/item:scale-125 transition-transform"></i> 
+                                Brief sécurité personnalisé
+                            </li>
                     </ul>
+                    </div>
                 </div>
                 
-                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
-                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
+                <div class="service-card p-8 rounded-2xl group relative overflow-hidden" data-animate="fade-up">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary/80 to-gray-300/80 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                         <i class="fas fa-city text-black text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-black text-white mb-3">Chauffeur Toulouse centre</h3>
-                    <p class="text-gray-400">Trajets intra‑muros: Capitole, Carmes, Compans, Saint‑Cyprien. Attente incluse, itinéraires optimisés.</p>
-                    <ul class="mt-4 space-y-2 text-gray-400 text-sm">
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Disponibilité 24/7</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Chauffeur privé bilingue</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Paiement sans contact</li>
-                    </ul>
+                        <h3 class="text-2xl font-black text-white mb-3 group-hover:text-secondary transition-colors">Chauffeur Toulouse centre</h3>
+                        <p class="text-gray-300 mb-6">Trajets intra‑muros: Capitole, Carmes, Compans, Saint‑Cyprien. Attente incluse, itinéraires optimisés.</p>
+                        
+                        <!-- Sub-services visible -->
+                        <div class="space-y-3 mt-6">
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-map-marker-alt text-secondary"></i>
+                                        <span class="text-gray-300 font-medium">Trajets intra-muros</span>
                 </div>
-                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
-                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
+                                    <i class="fas fa-chevron-right text-secondary/50 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-clock text-secondary"></i>
+                                        <span class="text-gray-300 font-medium">Attente incluse</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-secondary/50 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-route text-secondary"></i>
+                                        <span class="text-gray-300 font-medium">Itinéraires optimisés</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-secondary/50 text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card p-8 rounded-2xl group relative overflow-hidden" data-animate="fade-up">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary/80 to-gray-300/80 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                         <i class="fas fa-plane-departure text-black text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-black text-white mb-3">Transfert aéroport Blagnac</h3>
-                    <p class="text-gray-400">Prise en charge à l’aéroport, suivi de vol, accueil personnalisé, gestion bagages.</p>
-                    <ul class="mt-4 space-y-2 text-gray-400 text-sm">
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Mercedes Classe V</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Eau, chargeurs, Wi‑Fi</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Itinéraires alternatifs</li>
-                    </ul>
+                        <h3 class="text-2xl font-black text-white mb-3 group-hover:text-secondary transition-colors">Transfert aéroport Blagnac</h3>
+                        <p class="text-gray-300 mb-6">Prise en charge à l'aéroport, suivi de vol, accueil personnalisé, gestion bagages.</p>
+                        
+                        <!-- Sub-services visible -->
+                        <div class="space-y-3 mt-6">
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-plane text-secondary"></i>
+                                        <span class="text-gray-300 font-medium">Suivi de vol en temps réel</span>
                 </div>
-                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
-                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
+                                    <i class="fas fa-chevron-right text-secondary/50 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-suitcase text-secondary"></i>
+                                        <span class="text-gray-300 font-medium">Assistance bagages</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-secondary/50 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-wifi text-secondary"></i>
+                                        <span class="text-gray-300 font-medium">Wi-Fi & Confort à bord</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-secondary/50 text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card p-8 rounded-2xl group relative overflow-hidden" data-animate="fade-up">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary/80 to-gray-300/80 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                         <i class="fas fa-briefcase text-black text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-black text-white mb-3">Événements & entreprises</h3>
-                    <p class="text-gray-400">Salons, séminaires (Labège, Centre de Congrès), tournées médias, visites clients: protocole VIP et discrétion.</p>
-                    <ul class="mt-4 space-y-2 text-gray-400 text-sm">
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Coordination logistique</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Conducteurs experts</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Facturation pro</li>
-                    </ul>
+                        <h3 class="text-2xl font-black text-white mb-3 group-hover:text-secondary transition-colors">Événements & entreprises</h3>
+                        <p class="text-gray-300 mb-6">Salons, séminaires (Labège, Centre de Congrès), tournées médias, visites clients: protocole VIP et discrétion.</p>
+                        
+                        <!-- Sub-services visible -->
+                        <div class="space-y-3 mt-6">
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-calendar-alt text-secondary"></i>
+                                        <span class="text-gray-300 font-medium">Salons & Séminaires</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-secondary/50 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-users text-secondary"></i>
+                                        <span class="text-gray-300 font-medium">Tournées médias</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-secondary/50 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-file-invoice text-secondary"></i>
+                                        <span class="text-gray-300 font-medium">Facturation professionnelle</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-secondary/50 text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact" class="btn-primary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center"><i class="fas fa-car mr-2"></i>Devis chauffeur Toulouse</a>
-                <a href="#services" class="btn-secondary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center"><i class="fas fa-list mr-2"></i>Voir tous les services</a>
-                <a href="#garde" class="btn-secondary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center"><i class="fas fa-user-shield mr-2"></i>Garde rapprochée</a>
+            <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg inline-flex items-center justify-center group">
+                    <span class="flex items-center">
+                        <i class="fas fa-car mr-2 group-hover:scale-110 transition-transform"></i>
+                        Devis chauffeur Toulouse
+                    </span>
+                </a>
+                <a href="#services" class="btn-secondary px-8 py-4 rounded-xl font-bold text-lg inline-flex items-center justify-center group">
+                    <span class="flex items-center">
+                        <i class="fas fa-list mr-2 group-hover:scale-110 transition-transform"></i>
+                        Voir tous les services
+                    </span>
+                </a>
+                <a href="#garde" class="btn-secondary px-8 py-4 rounded-xl font-bold text-lg inline-flex items-center justify-center group">
+                    <span class="flex items-center">
+                        <i class="fas fa-user-shield mr-2 group-hover:scale-110 transition-transform"></i>
+                        Garde rapprochée
+                    </span>
+                </a>
             </div>
         </div>
     </section>
 
+    <div class="section-divider"></div>
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-dark">
+    <section id="services" class="py-20 bg-dark relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+        </div>
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl lg:text-5xl font-black mb-6">SERVICES <span class="text-secondary">PROFESSIONNELS</span></h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+            <div class="text-center mb-20">
+                <div class="badge inline-block px-4 py-2 rounded-full mb-6">
+                    <span class="text-xs text-secondary font-bold uppercase tracking-wider">Expertise</span>
+                </div>
+                <h2 class="text-5xl lg:text-6xl font-black mb-6 leading-tight">
+                    SERVICES 
+                    <span class="text-secondary glow-text">PROFESSIONNELS</span>
+                </h2>
+                <p class="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
                     Des solutions de sécurité sur mesure pour répondre aux exigences les plus élevées en matière de protection rapprochée.
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8" data-stagger>
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 relative z-10" data-stagger>
                 <!-- Service 1 -->
-                <div id="protection-vip" class="service-card p-8 rounded-xl border-2 border-secondary lg:col-span-2" data-animate="scale">
-                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-user-secret text-black text-2xl"></i>
+                <div id="protection-vip" class="service-card p-8 rounded-2xl border-2 border-secondary lg:col-span-2 relative overflow-hidden group" data-animate="scale">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-20 h-20 bg-gradient-to-br from-secondary to-gray-300 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                            <i class="fas fa-user-secret text-black text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-black text-white mb-4">PROTECTION RAPPROCHÉE VIP</h3>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        <div class="badge inline-block px-3 py-1 rounded-full mb-4">
+                            <span class="text-xs text-secondary font-bold uppercase tracking-wider">Service Premium</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-4 group-hover:text-secondary transition-colors">PROTECTION RAPPROCHÉE VIP</h3>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
                         Agents spécialisés dans la protection discrète de personnalités publiques, célébrités et dirigeants.
                     </p>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-secondary mr-3"></i>
-                            Surveillance 24h/24 et 7j/7
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-secondary mr-3"></i>
-                            Analyse de menaces avancée
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-secondary mr-3"></i>
-                            Équipes d'intervention rapide
-                        </li>
-                    </ul>
+                        
+                        <!-- Sub-services visible -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-eye text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Surveillance 24/7</span>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-search text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Analyse de menaces</span>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-users-cog text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Équipes d'intervention</span>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-shield-alt text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Protection discrète</span>
+                                </div>
+                            </div>
+                        </div>
+                        
                     <div class="mt-6">
-                        <a href="#contact" class="btn-primary px-6 py-3 rounded-lg font-bold inline-flex items-center"><i class="fas fa-shield-alt mr-2"></i>Demander une protection</a>
+                            <a href="#contact" class="btn-primary px-6 py-3 rounded-xl font-bold inline-flex items-center group/btn">
+                                <i class="fas fa-shield-alt mr-2 group-hover/btn:scale-110 transition-transform"></i>
+                                Demander une protection
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
-                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-car text-black text-2xl"></i>
+                <div class="service-card p-8 rounded-2xl group relative overflow-hidden" data-animate="fade-up">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary/80 to-gray-300/80 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                            <i class="fas fa-car text-black text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-4 group-hover:text-secondary transition-colors">TRANSPORT SÉCURISÉ</h3>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Flotte Mercedes Classe V équipée pour un transport discret et sécurisé dans toutes les situations.
+                        </p>
+                        
+                        <!-- Sub-services visible -->
+                        <div class="space-y-3">
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-user-tie text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Conducteurs experts</span>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-route text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Itinéraires sécurisés</span>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-shield text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Protection renforcée</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-black text-white mb-4">TRANSPORT SÉCURISÉ</h3>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
-                        Flotte Mercedes Classe V équipée pour un transport discret et sécurisé dans toutes les situations.
-                    </p>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-secondary mr-3"></i>
-                            Conducteurs experts en sécurité
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-secondary mr-3"></i>
-                            Itinéraires sécurisés et alternatifs
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-secondary mr-3"></i>
-                            Véhicules à protection renforcée
-                        </li>
-                    </ul>
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="service-card p-8 rounded-xl" data-animate="fade-up">
-                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-shield-alt text-black text-2xl"></i>
+                <div class="service-card p-8 rounded-2xl group relative overflow-hidden" data-animate="fade-up">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary/80 to-gray-300/80 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                            <i class="fas fa-shield-alt text-black text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-4 group-hover:text-secondary transition-colors">SÉCURITÉ ÉVÉNEMENTIELLE</h3>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Protection complète pour événements à haut risque : galas, tournées, apparitions publiques.
+                        </p>
+                        
+                        <!-- Sub-services visible -->
+                        <div class="space-y-3">
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-users text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Gestion des foules</span>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-lock text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Sécurité périmétrique</span>
+                                </div>
+                            </div>
+                            <div class="sub-service-card p-4 rounded-lg relative">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-handshake text-secondary"></i>
+                                    <span class="text-gray-300 font-medium text-sm">Coordination officielle</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-black text-white mb-4">SÉCURITÉ ÉVÉNEMENTIELLE</h3>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
-                        Protection complète pour événements à haut risque : galas, tournées, apparitions publiques.
-                    </p>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-secondary mr-3"></i>
-                            Gestion des foules et accès
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-secondary mr-3"></i>
-                            Sécurité périmétrique avancée
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-secondary mr-3"></i>
-                            Coordination avec services officiels
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="section-divider"></div>
     <!-- Clients Section -->
-    <section id="clients" class="py-20 bg-black">
+    <section id="clients" class="py-20 bg-black relative overflow-hidden">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl lg:text-5xl font-black mb-6">CLIENTS <span class="text-secondary">PRESTIGIEUX</span></h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+            <div class="text-center mb-20">
+                <div class="badge inline-block px-4 py-2 rounded-full mb-6">
+                    <span class="text-xs text-secondary font-bold uppercase tracking-wider">Confiance</span>
+                </div>
+                <h2 class="text-5xl lg:text-6xl font-black mb-6 leading-tight">
+                    CLIENTS 
+                    <span class="text-secondary glow-text">PRESTIGIEUX</span>
+                </h2>
+                <p class="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
                     Nous protégeons certaines des personnalités les plus exposées au monde avec discrétion et professionnalisme.
                 </p>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-60" data-stagger>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-60 relative z-10" data-stagger>
                 <div class="bg-dark p-8 rounded-xl flex items-center justify-center h-32" data-animate>
                     <span class="text-white font-bold text-xl">CELEBRITY</span>
                 </div>
@@ -460,13 +1179,25 @@
         </div>
     </section>
 
-    <section id="faq" class="py-20 bg-dark">
+    <div class="section-divider"></div>
+    <section id="faq" class="py-20 bg-dark relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+        </div>
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl lg:text-5xl font-black mb-4">FAQ <span class="text-secondary">CHAUFFEUR TOULOUSE</span></h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Réponses aux questions fréquentes sur notre service de chauffeur privé à Toulouse et en Occitanie.</p>
+            <div class="text-center mb-16">
+                <div class="badge inline-block px-4 py-2 rounded-full mb-6">
+                    <span class="text-xs text-secondary font-bold uppercase tracking-wider">Questions</span>
             </div>
-            <div class="max-w-4xl mx-auto space-y-4">
+                <h2 class="text-5xl lg:text-6xl font-black mb-6 leading-tight">
+                    FAQ 
+                    <span class="text-secondary glow-text">CHAUFFEUR TOULOUSE</span>
+                </h2>
+                <p class="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
+                    Réponses aux questions fréquentes sur notre service de chauffeur privé à Toulouse et en Occitanie.
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-4 relative z-10">
                 <details class="service-card p-6 rounded-xl" data-animate="fade-up">
                     <summary class="font-bold cursor-pointer">Proposez-vous un service de chauffeur privé à Toulouse ?</summary>
                     <p class="mt-3 text-gray-300">Oui, nous opérons à Toulouse intra‑muros et dans toute l’aire toulousaine (Blagnac, Colomiers, Labège, Balma). Mercedes Classe V, conducteurs experts, protocole VIP.</p>
@@ -487,45 +1218,60 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-dark">
+    <section id="contact" class="py-20 bg-dark relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+        </div>
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 gap-16">
+            <div class="grid grid-cols-1 gap-16 relative z-10">
                 <div>
-                    <h2 class="text-4xl lg:text-5xl font-black mb-6">CONTACT <span class="text-secondary">TOULOUSE</span></h2>
-                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                    <div class="badge inline-block px-4 py-2 rounded-full mb-6">
+                        <span class="text-xs text-secondary font-bold uppercase tracking-wider">Contactez-nous</span>
+                    </div>
+                    <h2 class="text-5xl lg:text-6xl font-black mb-8 leading-tight">
+                        CONTACT 
+                        <span class="text-secondary glow-text">TOULOUSE</span>
+                    </h2>
+                    <p class="text-xl lg:text-2xl text-gray-300 mb-12 leading-relaxed font-light">
                         Basés à Toulouse, nous opérons 24h/24. Communications sécurisées et confidentielles. 
                         Transferts aéroport, événements et trajets VIP.
                     </p>
                     
-                    <div class="space-y-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
-                                <i class="fas fa-phone text-black"></i>
+                    <div class="space-y-8">
+                        <div class="flex items-center space-x-6 group/item">
+                            <div class="w-16 h-16 bg-gradient-to-br from-secondary to-gray-300 rounded-2xl flex items-center justify-center shadow-lg group-hover/item:scale-110 group-hover/item:rotate-3 transition-all duration-300">
+                                <i class="fas fa-phone text-black text-xl"></i>
                             </div>
                             <div>
-                                <p class="text-gray-400">LIGNE D'URGENCE</p>
-                                <p class="text-xl font-black text-white"><a href="tel:+33633391994" class="hover:underline">06 33 39 19 94</a></p>
+                                <p class="text-sm text-gray-400 uppercase tracking-wider mb-1">LIGNE D'URGENCE</p>
+                                <p class="text-2xl font-black text-white">
+                                    <a href="tel:+33633391994" class="hover:text-secondary transition-colors">06 33 39 19 94</a>
+                                </p>
                             </div>
                         </div>
                         
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
-                                <i class="fas fa-envelope text-black"></i>
+                        <div class="flex items-center space-x-6 group/item">
+                            <div class="w-16 h-16 bg-gradient-to-br from-secondary to-gray-300 rounded-2xl flex items-center justify-center shadow-lg group-hover/item:scale-110 group-hover/item:rotate-3 transition-all duration-300">
+                                <i class="fas fa-envelope text-black text-xl"></i>
                             </div>
                             <div>
-                                <p class="text-gray-400">EMAIL</p>
-                                <p class="text-xl font-black text-white"><a href="mailto:islemmasrafpro@gmail.com" class="hover:underline">islemmasrafpro@gmail.com</a></p>
+                                <p class="text-sm text-gray-400 uppercase tracking-wider mb-1">EMAIL</p>
+                                <p class="text-2xl font-black text-white">
+                                    <a href="mailto:islemmasrafpro@gmail.com" class="hover:text-secondary transition-colors break-all">islemmasrafpro@gmail.com</a>
+                                </p>
                             </div>
                         </div>
                         
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
-                                <i class="fas fa-map-marker-alt text-black"></i>
+                        <div class="flex items-center space-x-6 group/item">
+                            <div class="w-16 h-16 bg-gradient-to-br from-secondary to-gray-300 rounded-2xl flex items-center justify-center shadow-lg group-hover/item:scale-110 group-hover/item:rotate-3 transition-all duration-300">
+                                <i class="fas fa-map-marker-alt text-black text-xl"></i>
                             </div>
                             <div>
-                                <p class="text-gray-400">SIÈGE</p>
-                                <p class="text-xl font-black text-white">TOULOUSE • OCCITANIE • FRANCE</p>
+                                <p class="text-sm text-gray-400 uppercase tracking-wider mb-1">SIÈGE</p>
+                                <p class="text-2xl font-black text-white">TOULOUSE • OCCITANIE • FRANCE</p>
                             </div>
                         </div>
                     </div>
@@ -660,17 +1406,30 @@
             }
         });
 
-        // Reveal-on-scroll animations and lightweight parallax (mobile-friendly)
+            // Optimized reveal-on-scroll animations - Performance focused
         (function() {
             const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const animatedEls = document.querySelectorAll('[data-animate]');
-            animatedEls.forEach(el => el.classList.add('reveal-init'));
+            
+            // Use requestAnimationFrame for better performance
+            const initAnimations = () => {
+                animatedEls.forEach(el => {
+                    el.classList.add('reveal-init');
+                    el.style.willChange = 'opacity, transform';
+                });
+            };
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initAnimations);
+            } else {
+                initAnimations();
+            }
 
-            // Stagger support: add incremental delays within containers
+            // Enhanced stagger support with optimized delays
             document.querySelectorAll('[data-stagger]').forEach(container => {
                 const children = container.querySelectorAll('[data-animate]');
                 children.forEach((child, idx) => {
-                    child.style.transitionDelay = `${Math.min(idx * 80, 400)}ms`;
+                    child.style.transitionDelay = `${Math.min(idx * 80, 500)}ms`;
                 });
             });
 
@@ -678,27 +1437,53 @@
                 const io = new IntersectionObserver((entries) => {
                     entries.forEach(en => {
                         if (en.isIntersecting) {
-                            en.target.classList.add('reveal');
+                            // Use requestAnimationFrame for smooth reveal
+                            requestAnimationFrame(() => {
+                                en.target.classList.add('reveal');
+                                en.target.style.willChange = 'auto';
+                            });
                             io.unobserve(en.target);
                         }
                     });
-                }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+                }, { 
+                    threshold: 0.08, 
+                    rootMargin: '0px 0px -8% 0px' 
+                });
                 animatedEls.forEach(el => io.observe(el));
             } else {
-                animatedEls.forEach(el => el.classList.add('reveal'));
+                animatedEls.forEach(el => {
+                    el.classList.add('reveal');
+                    el.style.willChange = 'auto';
+                });
             }
 
-            // Simple parallax on hero image for mobile
+            // Optimized parallax effect - Throttled for performance
             const parallaxImgs = document.querySelectorAll('.parallax img');
+            let ticking = false;
+            let lastScrollY = 0;
+            
             const onScroll = () => {
-                parallaxImgs.forEach(img => {
-                    const rect = img.getBoundingClientRect();
-                    if (rect.bottom > 0 && rect.top < window.innerHeight) {
-                        const offset = (rect.top - window.innerHeight / 2) * -0.06;
-                        img.style.transform = `translateY(${offset.toFixed(2)}px)`;
-                    }
-                });
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const currentScrollY = window.scrollY;
+                        
+                        // Only update if scroll changed significantly (performance optimization)
+                        if (Math.abs(currentScrollY - lastScrollY) > 5) {
+                            parallaxImgs.forEach(img => {
+                                const rect = img.getBoundingClientRect();
+                                if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                                    const offset = (rect.top - window.innerHeight / 2) * -0.06;
+                                    img.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0) scale(1.01)`;
+                                }
+                            });
+                            lastScrollY = currentScrollY;
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
             };
+            
             if (!prefersReduced) {
                 window.addEventListener('scroll', onScroll, { passive: true });
                 onScroll();
@@ -758,9 +1543,9 @@
     </script>
   
   <!-- WhatsApp CTA bottom-right responsive with animated icon + text -->
-  <a href="https://wa.me/33633391994" aria-label="WhatsApp" target="_blank" rel="noopener" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 h-14 md:h-20 px-5 md:px-8 rounded-full bg-[#C0C0C0] hover:bg-[#E5E5E5] text-black shadow-xl md:shadow-2xl ring-1 ring-white/20 flex items-center gap-3 md:gap-4 transition-transform duration-200 hover:-translate-y-0.5">
-    <i class="fab fa-whatsapp text-2xl md:text-4xl animate-bounce"></i>
-    <span class="font-bold text-base md:text-xl animate-pulse">WhatsApp</span>
+  <a href="https://wa.me/33633391994" aria-label="WhatsApp" target="_blank" rel="noopener" class="whatsapp-btn fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 h-14 md:h-20 px-5 md:px-8 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#128C7E] hover:to-[#25D366] text-white shadow-2xl md:shadow-3xl ring-2 ring-white/30 flex items-center gap-3 md:gap-4 transition-all duration-300 hover:-translate-y-1 hover:scale-105 group">
+    <i class="fab fa-whatsapp text-2xl md:text-4xl group-hover:scale-110 transition-transform"></i>
+    <span class="font-bold text-base md:text-xl group-hover:scale-105 transition-transform">WhatsApp</span>
   </a>
   
   </body>
